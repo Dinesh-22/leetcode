@@ -13,27 +13,19 @@ public:
     vector<vector<int>>dp;
     int minCost(vector<vector<int>> &colors, int N) {
         // Write your code here.
-        dp.resize(N,vector<int>(4,-1));
-        return fun(colors,N,0,3);
+        int pink=0,black=0,yellow=0;
+        for(int i=0;i<N;i++)
+        {
+            int curr_pink = min(black,yellow)+colors[i][0];
+            int curr_black = min(pink,yellow)+colors[i][1];
+            int curr_yellow = min(pink,black)+colors[i][2];
+            pink=curr_pink;
+            black=curr_black;
+            yellow=curr_yellow;
+        }
+        return min(pink,min(black,yellow));
     }
-    int fun(vector<vector<int>> &colors, int N,int i,int prev)
-    {
-        if(i==colors.size()){
-            return 0;
-        }
-        int pink = INT_MAX, black = INT_MAX , yellow = INT_MAX;
-        if(dp[i][prev]!=-1)return dp[i][prev];
-        if(prev!=0){
-            pink = colors[i][0]+fun(colors,N,i+1,0);
-        }
-        if(prev!=1){
-            black = colors[i][1]+fun(colors,N,i+1,1);
-        }
-        if(prev!=2){
-            yellow = colors[i][2]+fun(colors,N,i+1,2);
-        }
-        return dp[i][prev]=min(pink,min(black,yellow));
-    }
+    
 };
 
 
