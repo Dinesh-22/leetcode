@@ -33,42 +33,53 @@ class Solution
 {
     public:
     //Function to sort a linked list of 0s, 1s and 2s.
+    void insertAtTail(Node* &tail,Node* curr){
+        tail->next = curr;
+        tail = curr;
+    }
     Node* segregate(Node *head) {
         
         // Add code here
-        int zeroCount = 0;
-        int oneCount = 0;
-        int twoCount = 0;
+        Node* zeroHead = new Node(-1);
+        Node* zeroTail = zeroHead;
+        Node* oneHead = new Node(-1);
+        Node* oneTail = oneHead;
+        Node* twoHead = new Node(-1);
+        Node* twoTail = twoHead;
         
-        Node* temp = head;
-        while(temp!=NULL){
-            if(temp->data ==0){
-                zeroCount++;
+        Node* curr = head;
+        while(curr!=NULL){
+            int value = curr->data;
+            
+            if(value ==0){
+                insertAtTail(zeroTail,curr);
             }
-            else if(temp->data ==1){
-                oneCount++;
+            else if(value ==1){
+                insertAtTail(oneTail,curr);
             }
-            else if(temp->data ==2){
-                twoCount++;
+            if(value == 2){
+                insertAtTail(twoTail,curr);
             }
-            temp = temp->next;
+            curr = curr ->next;
         }
-        temp = head;
-        while(temp!=NULL){
-            if(zeroCount!=0){
-                temp->data = 0;
-                zeroCount --;
-            }
-            else if(oneCount!=0){
-                temp->data = 1;
-                oneCount --;
-            }
-            else if(twoCount!=0){
-                temp->data =2;
-                twoCount --;
-            }
-            temp = temp->next;
+        
+        //1st list is not empty 
+        if(oneHead->next!=NULL){
+            zeroTail-> next = oneHead->next;
         }
+        else{
+            //1st list empty 
+            zeroTail->next = twoHead->next;
+        }
+        oneTail->next = twoHead->next;
+        twoTail->next = NULL;
+        
+        head = zeroHead->next;
+        //delete dummyNodes 
+        delete zeroHead;
+        delete oneHead;
+        delete twoHead;
+        
         return head;
     }
 };
