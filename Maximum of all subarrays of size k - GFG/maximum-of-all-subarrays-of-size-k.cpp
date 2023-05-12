@@ -15,18 +15,31 @@ class Solution
     vector <int> max_of_subarrays(int *arr, int n, int k)
     {
         // your code here
-        multiset<int> s;
-    	vector<int> ret;
-    	for(int i = 0; i < k; i++){
-    		s.insert(arr[i]);
-    	}
-    	for(int i = k; i < n; i++){
-    		ret.push_back(*s.rbegin());
-    		s.erase(s.find(arr[i-k]));
-    		s.insert(arr[i]);
-    	}
-    	ret.push_back(*s.rbegin());
-    	return ret;
+        vector<int>ans;
+        deque<int>maxi(k);
+        //1st window 
+        for(int i=0;i<k;i++){
+            while(!maxi.empty() && arr[maxi.back()]<=arr[i]){
+                maxi.pop_back();
+            }
+            maxi.push_back(i);
+        }
+        ans.push_back(arr[maxi.front()]);
+        //remaining windows 
+        for(int i=k;i<n;i++){
+            //removal 
+            while(!maxi.empty() && i-maxi.front()>=k){
+                maxi.pop_front();
+            }
+            
+            //addition 
+            while(!maxi.empty() && arr[maxi.back()]<=arr[i]){
+                maxi.pop_back();
+            }
+            maxi.push_back(i);
+            ans.push_back(arr[maxi.front()]);
+        }
+        return ans;
     }
 };
 
