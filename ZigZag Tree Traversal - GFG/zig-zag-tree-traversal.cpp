@@ -112,33 +112,28 @@ class Solution{
     	}
     	queue<Node*>q;
     	q.push(root);
-    	
     	bool leftToRight = true;
     	while(!q.empty()){
     	    int size = q.size();
     	    vector<int>ans(size);
-    	    
     	    for(int i=0;i<size;i++){
-    	        Node* temp = q.front();
+    	        Node* frontNode = q.front();
     	        q.pop();
-    	       
-    	        int index = leftToRight? i : size-i-1;
-    	        ans[index] = temp -> data;
-    	        
-    	        if(temp->left){
-    	            q.push(temp->left);
+    	        int index = leftToRight?i:size-i-1;
+    	        ans[index] = frontNode->data;
+    	        if(frontNode->left){
+    	            q.push(frontNode->left);
     	        }
-    	        if(temp->right){
-    	            q.push(temp->right);
+    	        if(frontNode->right){
+    	            q.push(frontNode->right);
     	        }
     	    }
-    	    leftToRight = !leftToRight;
-    	    for(auto it: ans){
-    	        res.push_back(it);
+    	    leftToRight=!leftToRight;
+    	    for(auto i:ans){
+    	        res.push_back(i);
     	    }
     	}
     	return res;
-    	
     }
 };
 
