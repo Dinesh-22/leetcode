@@ -20,15 +20,15 @@ class Solution
             v.push_back(p);
         }
         sort(v.begin(),v.end(),cmp);
-        int count = 1;
+        int cnt = 1;
         int ansEnd = v[0].second;
         for(int i=1;i<n;i++){
             if(v[i].first>ansEnd){
-                count++;
+                cnt++;
                 ansEnd = v[i].second;
             }
         }
-        return count;
+        return cnt;
     }
 };
 
