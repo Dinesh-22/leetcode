@@ -8,14 +8,15 @@ class Solution {
 		string FirstNonRepeating(string A){
 		    // Code here
 		    unordered_map<char,int>mp;
-		    queue<int>q;
-		    string ans="";
+		    queue<char>q;
+		    string ans = "";
 		    for(int i=0;i<A.size();i++){
 		        char ch = A[i];
-		        //store count in the map 
+		        //put the element in hash map
 		        mp[ch]++;
-		        //push the element in queue 
+		        //push the element in queue
 		        q.push(ch);
+		        //iterate through the queue 
 		        while(!q.empty()){
 		            if(mp[q.front()]>1){
 		                q.pop();
