@@ -33,54 +33,36 @@ class Solution
 {
     public:
     //Function to sort a linked list of 0s, 1s and 2s.
-    void insertAtTail(Node* &tail,Node* curr){
-        tail->next = curr;
-        tail = curr;
-    }
     Node* segregate(Node *head) {
         
         // Add code here
-        Node* zeroHead = new Node(-1);
-        Node* zeroTail = zeroHead;
-        Node* oneHead = new Node(-1);
-        Node* oneTail = oneHead;
-        Node* twoHead = new Node(-1);
-        Node* twoTail = twoHead;
-        
-        Node* curr = head;
-        while(curr!=NULL){
-            int value = curr->data;
-            
-            if(value ==0){
-                insertAtTail(zeroTail,curr);
-            }
-            else if(value ==1){
-                insertAtTail(oneTail,curr);
-            }
-            if(value == 2){
-                insertAtTail(twoTail,curr);
-            }
-            curr = curr ->next;
+        int zeroCount = 0, oneCount = 0 , twoCount =0;
+        Node* temp = head;
+        while(temp!=NULL){
+            if(temp->data == 0) zeroCount++;
+            else if(temp->data ==1) oneCount++;
+            else twoCount++;
+            temp = temp->next;
         }
-        
-        //1st list is not empty 
-        if(oneHead->next!=NULL){
-            zeroTail-> next = oneHead->next;
+        temp = head;
+        while(temp!=NULL){
+            if(zeroCount){
+                temp->data = 0;
+                zeroCount--;
+            }
+            else if(oneCount){
+                temp->data = 1;
+                oneCount--;
+            }
+            else{
+                temp->data = 2;
+                twoCount--;
+            }
+            temp = temp->next;
         }
-        else{
-            //1st list empty 
-            zeroTail->next = twoHead->next;
-        }
-        oneTail->next = twoHead->next;
-        twoTail->next = NULL;
-        
-        head = zeroHead->next;
-        //delete dummyNodes 
-        delete zeroHead;
-        delete oneHead;
-        delete twoHead;
-        
         return head;
+        
+        
     }
 };
 
