@@ -10,7 +10,7 @@ using namespace std;
 
 class Solution{
 public:
-    void insertAtBottom(stack<int> &st, int x){
+    void insertAtBottom(stack<int>&st, int x){
         if(st.empty()){
             st.push(x);
             return;
@@ -21,13 +21,13 @@ public:
         st.push(num);
     }
     void Reverse(stack<int> &st){
-       if(st.empty()){
-           return;
-       }
-       int num = st.top();
-       st.pop();
-       Reverse(st);
-       insertAtBottom(st,num);
+        if(st.empty()){
+            return;
+        }
+        int num = st.top();
+        st.pop();
+        Reverse(st);
+        insertAtBottom(st,num);
     }
 };
 
