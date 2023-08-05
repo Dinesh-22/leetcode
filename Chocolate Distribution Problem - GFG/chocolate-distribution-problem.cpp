@@ -12,8 +12,8 @@ class Solution{
     int j=m-1;
     int mini = INT_MAX;
     while(j<a.size()){
-        int diff = a[j] - a[i];
-        mini = min(mini,diff);
+        int diff = a[j]-a[i];
+        mini = min(diff,mini);
         i++;
         j++;
     }
