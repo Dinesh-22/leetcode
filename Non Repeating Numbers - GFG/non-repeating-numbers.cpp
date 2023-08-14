@@ -9,14 +9,24 @@ public:
     vector<int> singleNumber(vector<int> nums) 
     {
         // Code here.
-        unordered_map<int,int>mp;
-        vector<int>ans;
+        int xorans = 0;
         for(int i=0;i<nums.size();i++){
-            mp[nums[i]]++;
+            xorans^=nums[i];
         }
-        for(auto it:mp){
-            if(it.second==1) ans.push_back(it.first);
+        //find the rightmost setbit
+        xorans = xorans & ~(xorans-1);
+        int set1 =0,set2=0;
+        for(int i=0;i<nums.size();i++){
+            if(xorans & nums[i]){
+                set1^=nums[i];
+            }
+            else{
+                set2^=nums[i];
+            }
         }
+        vector<int>ans;
+        ans.push_back(set1);
+        ans.push_back(set2);
         sort(ans.begin(),ans.end());
         return ans;
     }
