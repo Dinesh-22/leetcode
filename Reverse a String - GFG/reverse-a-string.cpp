@@ -9,19 +9,19 @@ using namespace std;
 
 // } Driver Code Ends
 //User function Template for C++
-
-string reverseWord(string str){
-    
-  //Your code here
-  int n = str.size();
-  int left = 0, right = n-1;
-  while(left<=right){
-      swap(str[left],str[right]);
-      left++;
-      right--;
-  }
-  return str;
-}
+class Solution
+{
+    public:
+    string reverseWord(string s)
+    {
+        // Your code goes here
+        int n = s.size();
+        for(int i=0;i<n/2;i++){
+            swap(s[i],s[n-i-1]);
+        }
+        return s;
+    }
+};
 
 
 
@@ -33,10 +33,10 @@ int main() {
 	cin>>t;
 	while(t--)
 	{
-	string s;
-	cin >> s;
-	
-	cout << reverseWord(s) << endl;
+    	string s;
+    	cin >> s;
+    	Solution ob;
+    	cout << ob.reverseWord(s) << endl;
 	}
 	return 0;
 	
