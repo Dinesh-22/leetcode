@@ -114,16 +114,17 @@ struct Node
          10
       /      \ 
    20       30 */
-void inorder(Node* root, int &count){
+void inorder(Node* root, int &cnt){
     if(root == NULL){
         return;
     }
-    inorder(root->left,count);
-    if(root->left == NULL && root->right==NULL){
-        count++;
+    inorder(root->left,cnt);
+    if(root->left ==NULL && root->right == NULL){
+        cnt++;
     }
-    inorder(root->right,count);
-}   
+    inorder(root->right,cnt);
+    
+}
 int countLeaves(Node* root)
 {
   // Your code here
