@@ -16,19 +16,18 @@ class Solution
     {
         //code here
         vector<long long>ans;
-        long long a=1,b=1;
         if(n==1){
-            ans.push_back(a);
+            ans.push_back(1);
             return ans;
         }
-        ans.push_back(a);
-        ans.push_back(b);
-        for(int i=2;i<n;i++)
-        {
-            long long c=a+b;
-            ans.push_back(c);
-            a=b;
-            b=c;
+        long long prev =1 ,prev1=1;
+        ans.push_back(prev);
+        ans.push_back(prev1);
+        for(int i=3;i<=n;i++){
+            long long temp = prev+prev1;
+            ans.push_back(temp);
+            prev = prev1;
+            prev1 = temp;
         }
         return ans;
     }
