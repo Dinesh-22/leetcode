@@ -22,7 +22,6 @@ class Solution {
     int romanToDecimal(string &s) {
         // code here
         int n = s.size();
-        if(n==1) return pattern(s[0]);
         int num = 0;
         for(int i=0;i<n-1;i++){
             int diff = pattern(s[i]) - pattern(s[i+1]);
