@@ -77,25 +77,23 @@ class Solution
 {
     public:
     Node* reverse(Node* head){
-        Node* prev = NULL;
         Node* curr = head;
-        Node* next = NULL;
-        
+        Node* prev = NULL;
+        Node* forward = NULL;
         while(curr!=NULL){
-            next = curr->next;
+            forward = curr->next;
             curr->next = prev;
             prev = curr;
-            curr = next;
+            curr = forward;
         }
         return prev;
     }
     void rearrange(struct Node *head)
     {
         //add code here
-        struct Node *odd = head;
-        struct Node *even = head->next;
-        struct Node *evenStart = even;
-        
+        Node* odd = head;
+        Node* even = head->next;
+        Node* evenStart = even;
         while(even!=NULL && even->next!=NULL){
             odd->next = even->next;
             odd = odd->next;
