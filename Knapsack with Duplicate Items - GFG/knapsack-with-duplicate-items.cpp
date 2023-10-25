@@ -21,11 +21,27 @@ public:
         }
         return dp[ind][W] = max(take,notTake);
     }
-    int knapSack(int N, int W, int val[], int wt[])
+    int knapSack(int N, int w, int val[], int wt[])
     {
         // code here
-        vector<vector<int>>dp(N,vector<int>(W+1,-1));
-        return f(N-1,W,val,wt,dp);
+        vector<vector<int>>dp(N,vector<int>(w+1,0));
+        // return f(N-1,w,val,wt,dp);
+        
+        for(int i=wt[0];i<=w;i++){
+            dp[0][i] = ((int)(i/wt[0])) * val[0];
+        }
+        
+        for(int ind=1;ind<N;ind++){
+            for(int W=0;W<=w;W++){
+                int notTake = 0+dp[ind-1][W];
+                int take = 0;
+                if(wt[ind]<=W){
+                    take = val[ind]+dp[ind][W-wt[ind]];
+                }
+                dp[ind][W] = max(take,notTake);
+            }
+        }
+        return dp[N-1][w];
         
     }
 };
